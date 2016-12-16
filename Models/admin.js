@@ -4,8 +4,9 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     authentication: DataTypes.BLOB
 
-
-  })};
+ });
+  return admin;
+};
   // Here we'll pass a second "classMethods" object into the define method
   // This is for any additional configuration we want to give our models
 //     {
@@ -17,5 +18,4 @@ module.exports = function(sequelize, DataTypes) {
 //         }
 //       }
 //     });
-//   return admin;
 // };
