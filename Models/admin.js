@@ -4,7 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     authentication: DataTypes.BLOB
 
-
   	});
 
   	return admin;
@@ -21,5 +20,4 @@ module.exports = function(sequelize, DataTypes) {
 //         }
 //       }
 //     });
-//   return admin;
 // };

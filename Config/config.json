@@ -3,7 +3,7 @@
     "username": "root",
     "password": "Mdd1&Pyd2",
     "database": "serviceapp_db",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
