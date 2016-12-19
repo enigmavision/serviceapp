@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var service = sequelize.define("Service", {
+  var location = sequelize.define("Location", {
     // Giving the Author model a name of type STRING
     onebedroomapt: DataTypes.STRING,
     twobedroomapt: DataTypes.STRING,
@@ -11,8 +11,11 @@ module.exports = function(sequelize, DataTypes) {
     familyroom: DataTypes.STRING,
     fullhouse: DataTypes.STRING
 
+  });
 
-  })};
+  return location;
+
+};
 //   // Here we'll pass a second "classMethods" object into the define method
 //   // This is for any additional configuration we want to give our models
 //     {

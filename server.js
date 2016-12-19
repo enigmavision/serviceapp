@@ -22,17 +22,13 @@ app.use(express.static("./public"));
 
 // Routes =============================================================
 
-require("./routes/html-routes.js")(app);
-require("./routes/connection.js")(app);
+//require("./routes/html-routes.js")(app);
+//require("./routes/connection.js")(app);
 
 // Syncing our sequelize models and then starting our express app
+console.log(db);
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
 });
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-modues.exports = db;
