@@ -28,7 +28,7 @@
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                   <li><a href="login.html">Home</a></li>
-                  <li><a href="quote.html">Request A Quote</a></li>
+                  <li><a href="quote.html">View Service Requests</a></li>
                   <li><a href="collapsible.html">Read Reviews</a></li>
                   
                 </ul>
@@ -48,70 +48,11 @@
       <div class="row">
             
           
-      
-           <div class="input-field col s6 m6">
-             
-              
-            
-
-             <div class="card-panel blue lighten-2">
-                <span class="white-text">Write A Review
-                </span>
-
-
-               
-                                
-                
-                <input placeholder="Your Name" id="first_name" type="text" class="validate">
-                <label for="first_name"></label>
-
-                <input placeholder="Service Provider" id="serviceProvider" type="text" class="validate">
-
-                 <select>
-                  <option value="" disabled selected>How Many Stars?</option>
-                  <option value="1">One Star</option>
-                  <option value="2">Two Stars</option>
-                  <option value="3">Three Stars</option>
-                  <option value="4">Four Stars</option>
-                  <option value="5">Five Stars</option>
-                </select>
-
-
-
-                <textarea placeholder="Your Review" id="textarea1" class="materialize-textarea"></textarea>
-
-
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                  <i class="material-icons right">send</i>
-                  </button>
-              
-                
-              
-              </div>
-        
-      <!-- 
-        <div class="card-panel teal">
-          <span class="white-text"><strong>PREVIOUS SERVICE PROVIDERS AND RATINGS</strong></span><br>
-          <span class="white-text">
-            <ul>
-              <li>Carl Johnson: 5 stars</li>
-              <li>Steve Henry: 4 stars</li>
-              <li>Taylor Smith: 4.5 stars</li>
-              <li>Bubbly Shine Cleaning Service: 4.5 stars</li>
-              <li>Maids Around Town: 3 stars</li>
-            </ul>
-          </span>
-        </div>
-
-      -->
-
-      </div>
-
-        <div class="col s6"> 
+        <div class="col s12"> 
              <div class="card large">
               <div class="card-image">
                 <img src="http://placebeard.it/680/480">
-                  <span class="card-title">User</span>
+                  <span class="card-title">Service Provider</span>
               </div>
             
             <div class="card-content">
@@ -119,6 +60,8 @@
               <p>Address: 123 Main Street</p>
               <p>City: Austin, Texas</p>
               <p>Zip: 78748</p>
+
+
              
               <p> 
 
@@ -126,8 +69,10 @@
             </div>
             
             <div class="card-action">
-              <a href="editAddUser.html">Update Profile</a>
+              <a href="editAddProvider.html">Update Profile</a>
             </div>
+            
+
             </div>
 
         </div>
@@ -136,7 +81,32 @@
 
     
 
-   
+    <div class="row">
+
+
+           <div class="col s12 m12">
+          <div class="card-panel blue lighten-2">
+          <h2>About Us</h2>
+          <span class="white-text">Lorem ipsum dolor sit amet, te pro tale lobortis assentior. Movet regione signiferumque pro te. An falli aliquando mea, no ius vero ocurreret. Ea reque dolore graeci sea, at prima brute dicta duo.
+          </span>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
 
 
     </div>

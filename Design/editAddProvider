@@ -25,8 +25,7 @@
               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 <li><a href="login.html">Home</a></li>
-              
-               
+
                 
               </ul>
               <ul class="side-nav" id="mobile-demo">
@@ -41,13 +40,13 @@
 
 <div class="container">
       
-  <h1 class="text-centered">Tell Us a Bit about Yourself</h1> 
+  <h3 class="text-centered">Tell Us a Bit about Your Service</h3> 
   <div class="row">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
           <input id="name" type="text" class="validate">
-          <label for="name">Full Name</label>
+          <label for="name">Company Name</label>
         </div>
            <div class="input-field col s6">
           <input id="email" type="email" class="validate">
@@ -112,12 +111,42 @@
           
           
     </div>
+
+
+    <div class="row">
+        
+      <h4>Special Services Offered</h4>
+        <div class="input-field col s12">
+          <input type="checkbox" id="floors" class="filled-in" />
+          <label for="floors">Floors</label>
+          &nbsp;
+          &nbsp; 
+
+          <input type="checkbox" id="windowCleaning" class="filled-in" />
+          <label for="windowCleaning">Window Cleaning</label>
+          &nbsp; 
+          &nbsp; 
+          <input type="checkbox" id="kitchen" class="filled-in" />
+          <label for="kitchen">Kitchen</label>
+          &nbsp;
+          &nbsp; 
+
+           <input type="checkbox" id="laundry" class="filled-in" />
+          <label for="laundry">Laundry</label>
+          &nbsp;
+          &nbsp; 
+
+
+
+
+        </div>
+      </div>
       
       
     
       </div>
       
-      <button class="btn waves-effect waves-light" type="submit" name="action">Create User<i class="material-icons right">input</i>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Create Service Profile<i class="material-icons right">input</i>
       </button>
       
     </form>
