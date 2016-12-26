@@ -1,0 +1,217 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+    
+ 
+<div class="main-container">
+ 
+    
+        
+           <nav>
+            <div class="nav-wrapper">
+              <div class="container">
+              <a href="#!" class="brand-logo">serviceapp</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="login.html">Home</a></li>
+
+                
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="login.html">Home</a></li>
+                <li><a href="serviceRequest.html">Request A Quote</a></li>
+                <li><a href="userProfile.html">My Account</a></li>
+               </ul>
+              </div>
+            </div>
+          </nav>
+
+
+<div class="container">
+      
+  <h3 class="text-centered">Tell Us a Bit about Your Service</h3> 
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name" type="text" class="validate">
+          <label for="name">Company Name</label>
+        </div>
+           <div class="input-field col s6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      
+    <div class="row">
+        
+
+
+        <div class="input-field col s6">
+           <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      
+      
+        <div class="input-field col s6">
+           <input id="confirmPassword" type="password" class="validate">
+          <label for="confirmPassword">Confirm Password</label>
+          
+        </div>
+
+          
+
+
+      </div>
+
+
+      <div class="row">
+
+              <div class="input-field col s6">
+                <input id="address" type="text" class="validate">
+                <label for="address">Address</label>
+              </div>
+
+
+              <div class="input-field col s6">
+                <input id="zipCode" type="number" class="validate">
+                <label for="zipCode">Zip Code</label>
+              </div>
+
+      </div>
+      
+
+      
+    
+
+
+
+    <div class="row">
+        <div class="input-field col s12">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Avatar</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+          
+          
+    </div>
+
+
+    <div class="row">
+        
+      <h4>Special Services Offered</h4>
+        <div class="input-field col s12">
+          <input type="checkbox" id="floors" class="filled-in" />
+          <label for="floors">Floors</label>
+          &nbsp;
+          &nbsp; 
+
+          <input type="checkbox" id="windowCleaning" class="filled-in" />
+          <label for="windowCleaning">Window Cleaning</label>
+          &nbsp; 
+          &nbsp; 
+          <input type="checkbox" id="kitchen" class="filled-in" />
+          <label for="kitchen">Kitchen</label>
+          &nbsp;
+          &nbsp; 
+
+           <input type="checkbox" id="laundry" class="filled-in" />
+          <label for="laundry">Laundry</label>
+          &nbsp;
+          &nbsp; 
+
+
+
+
+        </div>
+      </div>
+      
+      
+    
+      </div>
+      
+      <button class="btn waves-effect waves-light" type="submit" name="action">Create Service Profile<i class="material-icons right">input</i>
+      </button>
+      
+    </form>
+  </div>
+     
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    </div>
+       
+
+      
+
+</div>
+
+
+
+ <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">serviceapp</h5>
+                <p class="grey-text text-lighten-4">We will help you find the right service for your home.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2016 serviceapp
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+
+
+    <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script> 
+        $(document).ready(function() {
+           
+
+
+           $(".button-collapse").sideNav(); 
+            $('select').material_select();
+          
+
+
+          });
+
+    </script>
+
+  </body>
+</html>
