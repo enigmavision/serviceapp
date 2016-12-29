@@ -28,8 +28,8 @@
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                   <li><a href="login.html">Home</a></li>
-                  <li><a href="quote.html">Request A Quote</a></li>
-                  <li><a href="collapsible.html">Read Reviews</a></li>
+                  <li><a href="#modal2">Request Service</a></li>
+                  <li><a href="#modal1">Read Reviews</a></li>
                   
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
@@ -167,7 +167,169 @@
     </div>
 
 
+<!-- Reviews Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4 align="center">Recent Reviews</h4>
+        <div class="collection">
+            
 
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+          
+
+
+
+
+          </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+  </div>
+          
+
+
+
+   <!-- Request Service Modal Structure -->
+  <div id="modal2" class="modal bottom-sheet">
+    <div class="modal-content">
+     
+      
+      <div class="container">
+      
+        <h1 class="text-centered">What's your living situation?</h1> 
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name" type="text" class="validate">
+          <label for="name">Full Name</label>
+        </div>
+           <div class="input-field col s6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        
+
+
+        <div class="input-field col s6">
+          <input id="address" type="text" class="validate">
+          <label for="address">Address</label>
+        </div>
+      
+      
+        <div class="input-field col s6">
+          <select>
+            <option value="" disabled selected>Number of Bedrooms</option>
+            <option value="1"> 1</option>
+            <option value="2"> 2</option>
+            <option value="3"> 3</option>
+            <option value="4"> 4</option>
+            <option value="5"> 5</option>
+          
+          </select>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+      </div>
+      
+
+      
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Square Footage of Home" id="sqrFootage" type="number" class="validate">
+          
+        </div>
+      
+       <div class="input-field col s6">
+          <select>
+            <option value="" disabled selected>Number of Bathrooms</option>
+            <option value="1"> 1</option>
+            <option value="2"> 2</option>
+            <option value="3"> 3</option>
+            <option value="4"> 4</option>
+            <option value="5"> 5</option>
+          
+          </select>
+          
+        </div>
+    
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="checkbox" id="floors" class="filled-in" />
+          <label for="floors">Floors</label>
+
+          <input type="checkbox" id="windowCleaning" class="filled-in" />
+          <label for="windowCleaning">Window Cleaning</label>
+
+          <input type="checkbox" id="kitchen" class="filled-in" />
+          <label for="kitchen">Kitchen</label>
+
+           <input type="checkbox" id="laundry" class="filled-in" />
+          <label for="laundry">Laundry</label>
+
+
+
+
+        </div>
+      </div>
+      
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+      
+    </form>
+  </div>
+     
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+
+
+
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
 
 
 
@@ -202,6 +364,12 @@
           });
 
           $('select').material_select('destroy');
+
+
+           $(document).ready(function(){
+              // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+              $('.modal').modal();
+            });
 
       
                
