@@ -3,7 +3,9 @@ module.exports = function(sequelize, DataTypes) {
     // Giving the Author model a name of type STRING
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    address: DataTypes.STRING
+    address: DataTypes.STRING,
+    passHash: DataTypes.STRING,
+    scope: DataTypes.STRING
 
   });
 

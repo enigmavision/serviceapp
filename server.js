@@ -8,9 +8,6 @@ var bodyParser = require("body-parser");
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-// Requiring our models for syncing
-var db = require("./Models");
-
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,10 +21,31 @@ app.use(express.static("./public"));
 
 // require("./routes/html-routes.js")(app);
 // require("./routes/connection.js")(app);
+require("./routes/routes.js")(app); // just for handling authentication right now
 
-// Syncing our sequelize models and then starting our express app
+// Requiring our models for syncing
+var db = require("./Models");
+
+// Requiring the authentication module for the app
+var auth = require("./authentication.js");
+
+// Any initialization requiring persisted data from the database is done here
 db.sequelize.sync({force: true}).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
+
+	auth.init().then(startServer);
+
 });
+
+// this function will be called by all initialization functions when they are
+// complete, but it will not actually start the server until all of the initialization
+// functions have completed
+function startServer() {
+
+	if (auth.ready === false) return;
+
+	app.listen(PORT, function() {
+	console.log("App listening on PORT " + PORT);
+
+	});
+
+}
