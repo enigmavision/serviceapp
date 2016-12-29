@@ -1,3 +1,4 @@
+// run on document ready
 $(function() {
 
 	// add the click handler for the login button
@@ -11,7 +12,6 @@ $(function() {
 			method: "POST"
 		}).done(function(data, status, response) {
 			alert("The access token is: " + response.getResponseHeader("Authorization"));
-//			console.log(response.getAllResponseHeaders());
 		});
 
 	})
