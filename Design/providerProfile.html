@@ -28,14 +28,14 @@
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                   <li><a href="login.html">Home</a></li>
-                  <li><a href="quote.html">View Service Requests</a></li>
-                  <li><a href="collapsible.html">Read Reviews</a></li>
+                  <li><a href="#modal2">Reviews</a></li>
+                  <li><a href="#modal1">Service Requests</a></li>
                   
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                   <li><a href="sass.html">Home</a></li>
-                  <li><a href="badges.html">Request a Quote</a></li>
-                  <li><a href="collapsible.html">Current Bids</a></li>
+                  <li><a href="#modal2">Reviews</a></li>
+                  <li><a href="#modal1">Service Requests</a></li>
                   
                 </ul>
               <div class="container">
@@ -111,10 +111,42 @@
 
 
 	</div>
+
+
+
+     
 	
+   <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Current Service Requests</h4>
+      <div class="collection">
+        <a href="#!" class="collection-item">Alvin</a>
+        <a href="#!" class="collection-item">Kyle</a>
+        <a href="#!" class="collection-item">Susie</a>
+        <a href="#!" class="collection-item">Steve</a>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 
 
 
+   <div id="modal2" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Current Reviews</h4>
+      <div class="collection">
+        <a href="#!" class="collection-item">Review</a>
+        <a href="#!" class="collection-item">Review</a>
+        <a href="#!" class="collection-item">Review</a>
+        <a href="#!" class="collection-item">Review</a>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 
 
 
@@ -162,6 +194,11 @@
           });
 
           $('select').material_select('destroy');
+
+            $(document).ready(function(){
+              // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+              $('.modal').modal();
+            });
 
       
                
