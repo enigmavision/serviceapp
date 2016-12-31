@@ -21,18 +21,19 @@ app.use(express.static("./public"));
 
 // require("./routes/html-routes.js")(app);
 // require("./routes/connection.js")(app);
-require("./routes/routes.js")(app); // just for handling authentication right now
+//require("./routes/routes.js")(app); // just for handling authentication right now
 
 // Requiring our models for syncing
 var db = require("./Models");
 
 // Requiring the authentication module for the app
-var auth = require("./authentication.js");
+//var auth = require("./authentication.js");
 
 // Any initialization requiring persisted data from the database is done here
 db.sequelize.sync({force: true}).then(function() {
 
-	auth.init().then(startServer);
+	//auth.init().then(startServer);
+	startServer();
 
 });
 
@@ -41,7 +42,7 @@ db.sequelize.sync({force: true}).then(function() {
 // functions have completed
 function startServer() {
 
-	if (auth.ready === false) return;
+	//if (auth.ready === false) return;
 
 	app.listen(PORT, function() {
 	console.log("App listening on PORT " + PORT);
