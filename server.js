@@ -2,6 +2,9 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+var methodOverride = require('method-override');
+var exphbs = require('exprees-handlebars');
+
 
 // Sets up the Express App
 // =============================================================
@@ -13,6 +16,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+
+//Allows the backend to simulate a DELETE and PUT 
+app.use(methodOverride('_method'));
+
+
+//Setting up handlebars
+app.engine('handlebars', exphbs({defaultLayout:'main'}));
+app.set('view engine', 'handlebars');
+
+
+
 
 // Static directory
 app.use(express.static("./public"));
