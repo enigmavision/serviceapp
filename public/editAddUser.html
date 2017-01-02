@@ -106,7 +106,7 @@
               <input type="file">
             </div>
             <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+              <input id="avatar" class="file-path validate" type="text">
             </div>
           </div>
           
@@ -173,14 +173,72 @@
       <script> 
         $(document).ready(function() {
            
-
+          //Materialize js
 
            $(".button-collapse").sideNav(); 
+            
             $('select').material_select();
-          
 
 
-          });
+
+
+            //Capture form inputs
+
+            $("#submit").on("click", function() {
+
+
+
+              // Form validation
+                function validateForm() {
+                  var isValid = true;
+                  $(".validate").each(function() {
+                    if ($(this).val() === "") {
+                      isValid = false;
+                    }
+                  });
+
+
+                  // If all required fields are filled
+                  if (validateForm()) {
+                    // Create an object for the user's data
+                    var userData = {
+                      name: $("#name").val(),
+                      email: $("#email").val(),
+                      password: $("#password").val(). 
+                      cpassword: $("#confirmPassword").val(),
+                      address:  $("#address").val(),
+                      zipcode:  $("#zipCode").val(),
+                      avatar:   $("#avatar").val(),
+
+                    };
+
+
+                  }
+
+                    // Grab the URL of the website
+                    var currentURL = window.location.origin;
+
+                    // AJAX post the data to the users API.
+                    $.post(currentURL + "/api/users", userData, 
+                      function(data, status){
+
+                          alert("Data: " + data + "\nStatus: " + status);
+
+
+
+
+                      });
+                  
+                  else {
+                    alert("Please fill out all fields before submitting!");
+                  }
+
+                  return false;  
+          };
+
+    });
+    
+
 
     </script>
 
