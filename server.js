@@ -33,9 +33,9 @@ app.use(express.static("./public"));
 
 // Routes =============================================================
 
-// require("./routes/html-routes.js")(app);
+//require("./routes/html-routes.js")(app);
 // require("./routes/connection.js")(app);
-//require("./routes/routes.js")(app); // just for handling authentication right now
+require("./routes/routes.js")(app); // just for handling authentication right now
 require("./routes/api-routes.js")(app);
 // Requiring our models for syncing
 var db = require("./Models");
