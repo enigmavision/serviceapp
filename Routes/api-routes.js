@@ -30,9 +30,16 @@ module.exports = function(app){
 	
 	});
 
-	app.get("/api/provider", function(req, res){
+	app.get("/provider", function(req, res){
 
-		res.json(providers);
+		res.render("providerProfile",{
+			name: userData.name, 
+			email: userData.email, 
+			address: userData.address, 
+			zipcode: userData.zipcode, 
+			avatar: userData.avatar  
+
+		});
 	
 	});
 

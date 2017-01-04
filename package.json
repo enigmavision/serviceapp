@@ -28,5 +28,6 @@
     "njwt": "^0.3.2",
     "secure-random": "^1.1.1",
     "sequelize": "^3.27.0"
-  }
+  },
+  "devDependencies": {}
 }
