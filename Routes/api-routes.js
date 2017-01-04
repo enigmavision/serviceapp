@@ -6,7 +6,7 @@ var serviceRequests = require("../data/serviceRequests.js");
 //Dummy User Data Object 
 var userData = {
 	
-	name:"John Doe",
+	name: "John Doe",
 	email: "jdoe@gmail.com",
 	password: "iamanderson1",
 	cpassword: "iamanderson1",
@@ -23,7 +23,7 @@ module.exports = function(app){
 
 		res.render("userProfile", {
 			
-			address: userData.name, email: userData.email, address: userData.address, zipcode: userData.zipcode, avatar: userData.avatar   
+			name: userData.name, email: userData.email, address: userData.address, zipcode: userData.zipcode, avatar: userData.avatar   
 			
 			});
 
