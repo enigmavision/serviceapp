@@ -14,7 +14,7 @@ module.exports = {
 	signingKey: null, // the app's signing key for Jwt authentication
 
 	// login the indicated user; b64string is the base64 encoded username:password pair
-	login: function(b64string) {
+	login: function(b64string, create, scope) {
 
 		// unencode the string and extract the username and password from it
 		var unenc = atob(b64string);
@@ -35,25 +35,30 @@ module.exports = {
 			bcrypt.hash(password, null, null, function(err, hash) {
 
 				// see if this user is already in the database
-				db.User.findOne({ where: { name: username }, attributes: ["name", "passHash", "scope"] }).then(function(results) {
+				db.Account.findOne({ where: { name: username }, attributes: ["name", "passHash", "scope"] }).then(function(account) {
 
 					// if the user is not in the db then create them there
-					if (results === null) {
-						var scope = "User"; // right now all logins are created as User logins
-						db.User.create({
+					if (account === null) {
+						if (!create) {
+							reject(new Error("No account found for User name: " + username));
+						}
+						// create the new user account with the specified scope
+						db.Account.create({
 							name: username,
 							passHash: hash,
 							scope: scope
 						// after creating the user in the db, create the Jwt and resolve the promise
-						}).then(function() {
+						}).then(function(account) {
 							console.log("created new user record");
-							var token = self.createJwt(username, scope); 
-							resolve({ token: token, scope: scope });
+							console.log(account);
+							var token = self.createJwt(account);
+							console.log(token);
+							resolve({ token: token, account: account });
 						});
 					// if the user is in the db and the password hash matches, create the Jwt and resolve the promise
-					} else if (results[0].passHash === hash) {
-						var token = self.createJwt(results[0].name, results[0].scope);
-						resolve({ token: token, scope: results[0].scope });
+					} else if (account.passHash === hash) {
+						var token = self.createJwt(account);
+						resolve({ token: token, account: account });
 					// handle user name and password mismatch
 					} else {
 						reject(new Error("User name and password don't match"));
@@ -81,7 +86,7 @@ module.exports = {
 			  if(err){
 			    reject(err); // Token has expired, has been tampered with, etc 
 			  }else{
-			    resolve({ token: token, scope: verifiedJwt.body.scope }); 
+			    resolve({ token: token, claims: verifiedJwt.body }); 
 			  }
 			});
 
@@ -124,12 +129,15 @@ module.exports = {
 	},
 
 	// create a Jwt for the specified user and with the specified scope
-	createJwt: function (username, scope) {
+	createJwt: function (account) {
+
+		console.log(account.id + " " + account.name + " " + account.scope)
 
 		var claims = {
 		  iss: "http://serviceapp.com/", // the URL of the app
-		  sub: username, // the UID of the user
-		  scope: scope // the scope the user has in the app
+		  sub: account.id, // the UID of the user
+		  username: account.name, // the name of the user
+		  scope: account.scope // the scope the user has in the app
 		}
 
 		// the create is synchronous
