@@ -1,46 +1,8 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-        <!--Import style.css-->
-      <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
-
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-
-    <body>
+<body>
     
  
 <div class="main-container">
  
-    
-        
-           <nav>
-            <div class="nav-wrapper">
-              <div class="container">
-                <a href="#!" class="brand-logo">serviceapp</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                  <li><a href="login.html">Home</a></li>
-                 
-                  
-                  
-                </ul>
-                <ul class="side-nav" id="mobile-demo">
-                  <li><a href="sass.html">Home</a></li>
-                  
-                 
-                  
-                </ul>
-              <div class="container">
-            </div>
-          </nav>
     
 
     <div class="container">
@@ -51,15 +13,16 @@
         <div class="col s6 m6"> 
              <div class="card large">
               <div class="card-image">
-                <img src="http://placebeard.it/680/480">
-                  <span class="card-title">Service Provider</span>
+                <img src="{{avatar}}">
+                  <span class="card-title">{{name}}</span>
               </div>
             
             <div class="card-content">
             <ul>
-              <p>Address: 123 Main Street</p>
-              <p>City: Austin, Texas</p>
-              <p>Zip: 78748</p>
+              <p>Name: {{name}} </p>
+              <p>Address: {{address}}</p>
+              <p>Zip: {{zipcode}}</p>
+              <p>Email: {{email}}</p>
 
 
              
@@ -154,28 +117,7 @@
     </div>
        
    
-       <footer class="page-footer">
-         <div class="footerContainer">
-            <div class="container" id="footer">
-              <div class="row">
-                <div class="col l6 s12">
-                  <h5 class="white-text">serviceapp</h5>
-                  <p class="grey-text text-lighten-4">We will help you find the right service.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                  <h5 class="white-text">Links</h5>
-                  
-                </div>
-              </div>
-            </div>
-            <div class="footer-copyright">
-              <div class="container">
-              ©2016 serviceapp
-              <a class="grey-text text-lighten-4 right" href="#!">Links</a>
-              </div>
-            </div>
-          </div>
-        </footer>
+       
     </div>
 
 </div>
@@ -204,4 +146,3 @@
        </script>
 
   </body>
-</html>
