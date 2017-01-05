@@ -1,0 +1,142 @@
+<body>
+    
+ 
+<div class="main-container">
+ 
+    
+
+    <div class="container">
+      
+      <div class="row">
+            
+          
+        <div class="col s6 m6"> 
+             <div class="card large">
+              <div class="card-image">
+                <img src="{{avatar}}">
+                  <span class="card-title">{{name}}</span>
+              </div>
+            
+            <div class="card-content">
+            <ul>
+              <p>Name: {{name}} </p>
+              <p>Address: {{address}}</p>
+              <p>Zip: {{zipcode}}</p>
+              <p>Email: {{email}}</p>
+
+
+             
+              <p> 
+
+
+            </div>
+            
+            <div class="card-action">
+              <a href="editAddProvider.html">Update Profile</a>
+            </div>
+            
+
+            </div>
+
+        </div>
+
+      
+			<div class="col s6 m6">
+          
+
+        <div class="modal-content">
+          <h4>Current Reviews</h4>
+          <div class="collection">
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+            <a href="#!" class="collection-item">Review</a>
+          </div>
+        </div>
+
+        
+	   
+      </div>
+
+
+	</div>
+
+
+
+
+      
+    <div class="row">
+    
+
+  	
+		<div class="col s12 m12"> 
+			 <ul class="collection with-header">
+		        <li class="collection-header"><h4>Recent Service Requests</h4></li>
+		        <li class="collection-item">Alvin</li>
+		        <li class="collection-item">Alvin</li>
+		        <li class="collection-item">Alvin</li>
+		        <li class="collection-item">Alvin</li>
+		    </ul>
+	   </div>   	    
+
+
+	</div>
+
+
+
+     
+	
+   <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Current Service Requests</h4>
+      <div class="collection">
+        <a href="#!" class="collection-item">Alvin</a>
+        <a href="#!" class="collection-item">Kyle</a>
+        <a href="#!" class="collection-item">Susie</a>
+        <a href="#!" class="collection-item">Steve</a>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+    </div>
+       
+   
+       
+    </div>
+
+</div>
+
+
+    <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script> 
+      //Collapses sidebar nav
+       $(".button-collapse").sideNav(); 
+
+         $(document).ready(function() {
+            $('select').material_select();
+          });
+
+          $('select').material_select('destroy');
+
+            $(document).ready(function(){
+              // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+              $('.modal').modal();
+            });
+
+      
+               
+       </script>
+
+  </body>
