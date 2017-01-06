@@ -32,10 +32,10 @@ app.use(cookieParser());
 app.use(express.static("./public"));
 
 // Routes =============================================================
-require("./routes/routes.js")(app);
+require("./Routes/routes.js")(app);
 
 // Requiring our models for syncing
-var db = require("./models");
+var db = require("./Models");
 
 // Requiring the authentication module for the app
 var auth = require("./authentication.js");

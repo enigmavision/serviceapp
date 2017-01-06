@@ -2,7 +2,7 @@
 var auth = require("../authentication.js");
 
 // require the database
-var db = require("../models");
+var db = require("../Models");
 
 // Routes
 // =============================================================

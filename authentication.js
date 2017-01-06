@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 var atob = require('atob');
 
 // require the database
-var db = require("./models");
+var db = require("./Models");
 
 // export the authentication object
 module.exports = {
