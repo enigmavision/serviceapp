@@ -26,7 +26,7 @@ $("#add-btn").on("click", function(event) {
     // kitchen from kitchen input
     kitchen: $("#kitchen").val().trim(),
     // laundry from laundry input
-    laundry: $("#laundry").val().trim(),
+    laundry: $("#laundry").val().trim()
   };
 
   // send an AJAX POST-request with jQuery
