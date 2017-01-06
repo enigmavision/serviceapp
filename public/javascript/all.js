@@ -8,11 +8,11 @@ $.get("/api", function(data) {
   for (var i = 0; i < data.length; i++) {
     // create a parent div for the oncoming elements
     var requestSection = $("<div>");
-    // add a class to this div: 'well'
-    requestSection.addClass("well");
-    // add an id to the well to mark which well it is
+    // add a class to this div: 'Request'
+    requestSection.addClass("request");
+    // add an id to the request-well- to mark which request it is
     requestSection.attr("id", "request-well-" + i);
-    // append the well to the well section
+    // append the request to the request-well
     $("#request-well").append(requestSection);
 
     // Now add all of our Service Request data to the well we just placed on the page
