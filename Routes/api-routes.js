@@ -44,7 +44,7 @@ module.exports = function(app){
 	});
 
 	
-	app.get("/servicerequests", function(req, res){
+	app.get("/allservicerequests", function(req, res){
 
 		res.json(serviceRequests);
 	
