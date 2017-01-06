@@ -1,8 +1,8 @@
-// Code here handles what how the page displays all of the characters
-// It pings the server. The server then pings the database and displays all of the characters.
+// Code here handles what how the page displays all of the Service Request
+// It pings the server. The server then pings the database and displays all of the Service Request.
 
 // make a get request to our api to grab every Service Request
-$.get("/api", function(data) {
+$.get("/api/all", function(data) {
 
   // for each Service Request that our server sends us back
   for (var i = 0; i < data.length; i++) {

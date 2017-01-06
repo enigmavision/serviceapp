@@ -1,6 +1,8 @@
+var db = require("../Models/index.js");
+
 var users = require("../data/users.js");
 var providers = require("../data/providers.js");
-//var reviews = require("../data/reviews.js");
+// reviews = require("../data/reviews.js");
 var serviceRequests = require("../data/serviceRequests.js");  
 
 //Dummy User Data Object 
@@ -44,11 +46,40 @@ module.exports = function(app){
 	});
 
 	
-	app.get("/allservicerequests", function(req, res){
-
-		res.json(serviceRequests);
+	app.get("/api/all", function(req, res){
+		db.serviceRequest.findAll({}).then(function(results){
+			res.json(results);
+		
+		});
 	
 	});
+
+	app.post("/api/new", function(req, res) {
+
+    // Take the request...
+    var serviceRequest = req.body;
+
+    // Create a routeName
+    //var routeName = character.name.replace(/\s+/g, "").toLowerCase();
+
+    // Then add the character to the database using sequelize
+    db.serviceRequest.create({
+      //routeName: routeName,
+      
+      name: serviceRequest.name,
+      email: serviceRequest.email,
+      address: serviceRequest.address,
+      numberOfBedrooms: serviceRequest.numberOfBedrooms,
+      sqrFootage: serviceRequest.address,
+      numberofBathrooms: serviceRequest.address,
+      floors: serviceRequest.address,
+      windowCleaning: serviceRequest.address,
+      kitchen: serviceRequest.kitchen,
+      laundry: serviceRequest.laundry,
+
+    });
+
+  });
 
 
 }
