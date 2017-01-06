@@ -80,6 +80,28 @@ module.exports = function(app){
     });
 
   });
+	
+	app.post("/api/new", function(req, res){
+	 var quote= req.body;
+	 db.quote.create({
+	 	price: quote.price,
+	 	provider: quote.provider,
+	 	user: quote.user,
+	 	location: quote.location,
+	 	duration: quote.duration,
+	 	date: quote.date
+	 });
+	});
+
+//retrieve quotes for users
+	
+	app.get("/api/all", function(req, res){
+	 db.quote.findAll({})
+	 .then(function(results){
+	 	res.json(results);
+	
+     });
+  };
 
 
 }
