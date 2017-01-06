@@ -8,7 +8,7 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
 
-	// take care of any actions which happen on all requests
+	// take care of any actions which happen on all requests, mainly authentication
 	app.use("/", function(req, res, next) {
 
 		// handle any requests for the favicon
@@ -30,8 +30,6 @@ module.exports = function(app) {
 		// and passed through to the next handler
 		} else {
 
-			console.log("req.path = " + req.path);
-
 			// if we're just trying to load the login, addUser or addProvider page, send the request along and we're done
 			if ((req.path === "/login" || req.path === "/addUser" || req.path === "/addProvider")
 				&& req.method === "GET") {
@@ -39,69 +37,116 @@ module.exports = function(app) {
 				return;
 			}
 
-			// if we don't have an Authorization field in the header then do nothing XXXXredirect to the login page
-			if (req.header("Authorization") == null) {
-				console.log("invalid null authorization");
-				res.end();
-				//res.redirect("/login");
-			}
+			// if we don't have a jwt cookie, then this is either a login, addUser or addProvider POST request, or
+			// it's an unauthorized access. handle that case here
+			if (typeof req.cookies.jwt === "undefined") {
 
-			// if the Authorization field is Basic then this must be a login attempt
-			if (req.header("Authorization").substring(0, 5) === "Basic") {
-				var create = false;
-				var scope = "";
-				if (req.path === "/addUser") {
-					create = true;
-					scope = "User";
+				// if this request is not a POST to login or create a new user or provider, it is an
+				// unauthorized access and is terminated
+				if ((req.path !== "/login" && req.path !== "/addUser" && req.path !== "/addProvider")
+					|| req.method !== "POST") {
+					res.header("WWW-Authenticate", 'Basic realm="User Visible Realm"');
+					res.sendStatus(401); // Unauthorized access
+					return;
 				}
-				if (req.path === "/addProvider") {
-					create = true;
-					scope = "Provider";
-				}
-				auth.login(req.header("Authorization").substring(6), create, scope).then(function(results) {
-					console.log("we've logged in " + req.path);
+
+				// we must have a valid Authorization field with a Basic tag and encrypted user name and password
+				// in the request header in order to complete the login or create a new User or Provider
+				//if (req.header("Authorization").substring(0, 5) === "Basic") {
+				if (req.header("Authorization").substring(0, 5) === "Basic") {
+
+					var create = false; // default is logon
+					var scope = ""; // this will be set when the account is found or created
+
+					// if we are creating a new User or Provider, set the create and scope vars appropriately
 					if (req.path === "/addUser") {
-						console.log("req.body.email: " + req.body.email);
-						console.log("req.body.address: " + req.body.address);
-						console.log("req.body.zipcode: " + req.body.zipcode);
-						console.log("req.body.avatar: " + req.body.avatar);
-						//console.log(results.account);
-						// create the user info record
-						db.User.create({
-							email: req.body.email,
-							address: req.body.address,
-							zipcode: req.body.zipcode,
-							avatar: req.body.avatar
-						// and then set the foreign key to it in the accounts table
-						}).then(function(user) {
-							console.log("we create it");
-							results.account.UserId = user.id;
-							results.account.save();
-						}).catch(function(err) {
-							console.log("we got a sequelize error");
-						});
+						create = true;
+						scope = "User";
 					}
-					res.header("Authorization", results.token);
-					res.locals.userid = results.account.id;
-					res.locals.username = results.account.name;
-					res.locals.scope = results.account.scope;
-					next();
-				});
-			// if the Authorization field is Bearer then they have sent a token
-			} else if (req.header("Authorization").substring(0, 6) === "Bearer") {
-				var token = req.header("Authorization").substring(7);
-				auth.authenticate(token).then(function(results) {
-					res.header("Authorization", results.token);
-					res.locals.userid = results.claims.id;
-					res.locals.username = results.claims.name;
-					res.locals.scope = results.claims.scope;
-					next();
-				}).catch(function(err) {
+					if (req.path === "/addProvider") {
+						create = true;
+						scope = "Provider";
+					}
 
-				});
-			} else {
-				// TBD need to add authentication error here
+					// call the authentication login function. it will create a new account with the specified
+					// scope if specified. regardless, if the function is successful the account will be logged in
+					auth.login(req.header("Authorization").substring(6), create, scope).then(function(results) {
+
+						// save the important account info for access by any other middleware down the line
+						res.locals.userid = results.account.id;
+						res.locals.username = results.account.name;
+						res.locals.scope = results.account.scope;
+
+						// save the authentication token from the login as a cookie on the client
+						res.cookie("jwt", results.token);
+						
+						// if this was just a login to an existing user account we can just
+						// move on down the line
+						if (req.path === "/login") {
+							// head to the next route
+							next();
+							return;
+						}
+						
+						// if we created a new user account, add a new info record to the User table and relate
+						// it to the newly created account
+						if (req.path === "/addUser") {
+							// create the user info record
+							db.User.create({
+								email: req.body.email,
+								address: req.body.address,
+								zipcode: req.body.zipcode,
+								avatar: req.body.avatar
+							// and then set the foreign key to it in the accounts table
+							}).then(function(user) {
+								results.account.UserId = user.id;
+								results.account.save();
+								// head to the next route
+								next();
+								return;
+							}).catch(function(err) {
+								console.log("Sequelize error: " + err);
+							});
+						}
+						
+						// if we created a new provider account, add a new info record to the Provider table and relate
+						// it to the newly created account
+						if (req.path === "/addProvider") {
+							// create the provider info record
+							db.Provider.create({
+								email: req.body.email,
+								address: req.body.address,
+								zipcode: req.body.zipcode,
+								avatar: req.body.avatar
+							// and then set the foreign key to it in the accounts table
+							}).then(function(provider) {
+								results.account.ProviderId = provider.id;
+								results.account.save();
+								// head to the next route
+								next();
+								return;
+							}).catch(function(err) {
+								console.log("Sequelize error: " + err);
+							});
+						}
+
+					});
+
+				}
+
 			}
+
+			// finally, if we got here we are not trying to go to a login route and also do have a jwt cookie
+			// so let's try to authenticate it
+			auth.authenticate(req.cookies.jwt).then(function(claims) {
+				res.locals.userid = parseInt(claims.sub);
+				res.locals.username = claims.username;
+				res.locals.scope = claims.scope;
+				next();
+				return;
+			}).catch(function(err) {
+				// TBD need to add authentication error here if we can't authenticate the token
+			});
 
 		};
 
@@ -155,21 +200,27 @@ module.exports = function(app) {
 
 	});
 
-	// this is where actual login requests will come after successful login
+	// this is where add User requests will come after new User creation
 	app.post("/addUser", function(req, res) {
 
-		// this is where we need to redirect to the appropriate landing page depending
-		// on the scope granted the user during login
-		res.send("SUCCESS! Auth token issued.");
+		console.log("new user account added; id: " 
+			+ res.locals.userid + "; name: " 
+			+ res.locals.username + "; scope: " 
+			+ res.locals.scope);
+
+		res.end();
 
 	});
 
-	// this is where actual login requests will come after successful login
+	// this is where add Provider requests will come after new Provider creation
 	app.post("/addProvider", function(req, res) {
 
-		// this is where we need to redirect to the appropriate landing page depending
-		// on the scope granted the user during login
-		res.send("SUCCESS! Auth token issued.");
+		console.log("new provider account added; id: " 
+			+ res.locals.userid + "; name: " 
+			+ res.locals.username + "; scope: " 
+			+ res.locals.scope);
+
+		res.end();
 
 	});
 
@@ -179,18 +230,63 @@ module.exports = function(app) {
 		switch (res.locals.scope) {
 			case "User":
 				console.log("User login");
+				res.json({ scope: "User" });
 				break;
 			case "Provider":
 				console.log("Provider login");
+				res.json({ scope: "Provider" });
 				break;
 			default:
 				console.log("Unknown login")
+				res.json({ scope: "Unknown" });
 		}	
 
-		// this is where we need to redirect to the appropriate landing page depending
-		// on the scope granted the user during login
-		res.send("SUCCESS! Auth token issued.");
-
 	});
+
+	app.get("/user", function(req, res){
+
+		db.Account.findById(res.locals.userid, { include: [ db.User ] }).then(function(account) {
+			account.getUser().then(function(user) {
+				res.render("userProfile", {
+					name: account.name, 
+					email: user.email, 
+					address: user.address, 
+					zipcode: user.zipcode, 
+					avatar: user.avatar   
+				});
+			});
+		});
+	
+	});
+
+	app.get("/provider", function(req, res){
+
+		db.Account.findById(res.locals.userid, { include: [ db.Provider ] }).then(function(account) {
+			account.getProvider().then(function(provider) {
+				res.render("providerProfile", {
+					name: account.name, 
+					email: provider.email, 
+					address: provider.address, 
+					zipcode: provider.zipcode, 
+					avatar: provider.avatar   
+				});
+			});
+		});
+	
+	});
+
+/*
+	app.get("/api/review", function(req, res){
+
+		res.json(reviews);
+	
+	});
+
+	app.get("/api/servicerequests", function(req, res){
+
+		res.json(serviceRequests);
+	
+	});
+*/
 
 };

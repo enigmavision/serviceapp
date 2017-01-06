@@ -35,10 +35,10 @@ module.exports = {
 			bcrypt.hash(password, null, null, function(err, hash) {
 
 				// see if this user is already in the database
-				db.Account.findOne({ where: { name: username }, attributes: ["name", "passHash", "scope"] }).then(function(account) {
-
+				db.Account.findOne({ where: { name: username } }).then(function(account) {
 					// if the user is not in the db then create them there
 					if (account === null) {
+						// throw an error if account didn't exist and we weren't asked to create it
 						if (!create) {
 							reject(new Error("No account found for User name: " + username));
 						}
@@ -49,19 +49,20 @@ module.exports = {
 							scope: scope
 						// after creating the user in the db, create the Jwt and resolve the promise
 						}).then(function(account) {
-							console.log("created new user record");
-							console.log(account);
 							var token = self.createJwt(account);
-							console.log(token);
 							resolve({ token: token, account: account });
 						});
 					// if the user is in the db and the password hash matches, create the Jwt and resolve the promise
-					} else if (account.passHash === hash) {
-						var token = self.createJwt(account);
-						resolve({ token: token, account: account });
-					// handle user name and password mismatch
 					} else {
-						reject(new Error("User name and password don't match"));
+						bcrypt.compare(password, account.passHash, function(err, result) {
+							if (result) {
+								var token = self.createJwt(account);
+								resolve({ token: token, account: account });
+							// handle user name and password mismatch
+							} else {
+								reject(new Error("User name and password don't match"));
+							}
+						});
 					};
 
 				// handle any db errors
@@ -86,7 +87,7 @@ module.exports = {
 			  if(err){
 			    reject(err); // Token has expired, has been tampered with, etc 
 			  }else{
-			    resolve({ token: token, claims: verifiedJwt.body }); 
+			    resolve(verifiedJwt.body); 
 			  }
 			});
 
@@ -130,8 +131,6 @@ module.exports = {
 
 	// create a Jwt for the specified user and with the specified scope
 	createJwt: function (account) {
-
-		console.log(account.id + " " + account.name + " " + account.scope)
 
 		var claims = {
 		  iss: "http://serviceapp.com/", // the URL of the app

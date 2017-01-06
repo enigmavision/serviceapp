@@ -43,6 +43,7 @@ module.exports = function(app){
 	
 	});
 
+/*
 	app.get("/api/review", function(req, res){
 
 		res.json(reviews);
@@ -54,7 +55,6 @@ module.exports = function(app){
 		res.json(serviceRequests);
 	
 	});
-
-
+*/
 
 }

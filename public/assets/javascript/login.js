@@ -4,6 +4,11 @@ $(function() {
 	// add the click handler for the login button
 	$("#login").on("click", function() {
 
+		event.preventDefault();
+
+		// remove any existing jwt cookie before logging in
+		$.removeCookie('jwt', { path: '/' });
+
 		// POST the username and password to login
 		$.ajax({
 			headers: {
@@ -11,7 +16,21 @@ $(function() {
   			},
 			method: "POST"
 		}).done(function(data, status, response) {
-			alert("The access token is: " + response.getResponseHeader("Authorization"));
+			switch (data.scope) {
+				case "User":
+					console.log("User login");
+					// redirect to the user profile
+					$(location).attr('href', '/user');
+					break;
+				case "Provider":
+					console.log("Provider login");
+					// redirect to the user profile
+					$(location).attr('href', '/provider');
+					break;
+				default:
+					console.log("Unknown login")
+					alert("Unknown login scope")
+			}	
 		});
 
 	})
@@ -20,35 +39,19 @@ $(function() {
 	$("#addUser").on("click", function() {
 
 		event.preventDefault();
+
+		// redirect to the addUser page
 		$(location).attr('href', '/addUser');
-
-/*
-		// GET the addUser page
-		$.ajax("/addUser", 
-			{ method: "GET"
-	}).done(function(data, status, response) {
-			console.log("addUser request");
-
-		//$(location).attr('href', '/addUser');
-
-			//alert("The access token is: " + response.getResponseHeader("Authorization"));
-		});
-*/
 
 	})
 
 	// add the click handler for the addProvider link
 	$("#addProvider").on("click", function() {
 
-		$(location).attr('href', '/addProvider');
+		event.preventDefault();
 
-		// GET the addProvider page
-//		$.ajax("/addProvider", {
-//			method: "GET"
-//		}).done(function(data, status, response) {
-//			console.log("addProvider request")
-//			//alert("The access token is: " + response.getResponseHeader("Authorization"));
-//		});
+		// redirect to the add Provider page
+		$(location).attr('href', '/addProvider');
 
 	})
 

@@ -8,14 +8,14 @@ $(function() {
 	$('select').material_select();
 
 	// add the click handler for the create user button
-	$("#addUser").on("click", function() {
+	$("#addProvider").on("click", function() {
 
     	event.preventDefault();
 
       // If all required fields are filled
       if (validateForm()) {
-        // Create an object for the user's data
-        var userData = {
+        // Create an object for the provider's data
+        var providerData = {
           email: $("#email").val(),
           address:  $("#address").val(),
           zipcode:  $("#zipCode").val(),
@@ -25,16 +25,16 @@ $(function() {
         // remove any existing jwt cookie before logging in
         $.removeCookie('jwt', { path: '/' });
 
-    		// POST the new user data to create them and login
+    		// POST the new provider data to create them and login
     		$.ajax({
     			headers: {
     			"Authorization": "Basic " + btoa($("#name").val() + ":" + $("#password").val())
       			},
-      			data: userData,
+      			data: providerData,
     			method: "POST"
     		}).done(function(data, status, response) {
-          // redirect to the user profile page
-          $(location).attr('href', '/user');
+          // redirect to the provider profile page
+          $(location).attr('href', '/provider');
     		});
 
 	     }
